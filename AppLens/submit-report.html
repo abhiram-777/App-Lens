@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Report — AppLens</title>
+  <meta name="description" content="Contribute your experience to the AppLens community. Report bugs, battery drain, thermal issues, or privacy concerns.">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Top Acrylic Glass Navigation -->
+  <header class="al-header al-glass">
+    <div class="al-shell">
+      <div class="al-header-inner">
+        <a href="index.html" class="al-logo">
+          <div class="al-logo-mark">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <span>AppLens</span>
+        </a>
+
+        <ul class="al-nav-links">
+          <li><a href="explore.html" class="al-nav-link">Explore</a></li>
+          <li><a href="updates.html" class="al-nav-link">Updates</a></li>
+          <li><a href="community.html" class="al-nav-link">Community</a></li>
+        </ul>
+
+        <div class="al-header-actions">
+          <button class="al-header-search-trigger js-search-trigger" type="button" aria-label="Open search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span>Search apps...</span>
+            <kbd class="al-kbd-hint">Ctrl K</kbd>
+          </button>
+
+          <a href="submit-report.html" class="al-btn al-btn-primary al-header-report-btn active">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Submit Report</span>
+          </a>
+
+          <a href="profile.html" class="al-btn al-btn-subtle" style="padding: 0.5rem; border-radius: var(--al-radius-full);" title="My Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="al-main">
+    <div class="al-shell">
+      
+      <!-- Back link -->
+      <div style="margin-bottom: 1.5rem;">
+        <a href="community.html" class="al-btn al-btn-subtle al-btn-sm" style="display: inline-flex; align-items: center; gap: 0.35rem; color: var(--al-text-muted);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Community Feed
+        </a>
+      </div>
+
+      <!-- Centered, Calm App Form -->
+      <div style="max-width: 680px; margin: 0 auto;">
+        
+        <div style="margin-bottom: 2rem; text-align: left;">
+          <h1 style="font-size: 2rem; margin-bottom: 0.4rem;">Submit Community Report</h1>
+          <p style="color: var(--al-text-secondary); margin: 0; font-size: 1rem; line-height: 1.55;">
+            Your real-world feedback helps hundreds of people decide whether to install or hold off updating.
+          </p>
+        </div>
+
+        <!-- Form Card -->
+        <div class="al-card" style="padding: 2.25rem; box-shadow: var(--al-shadow-sm);">
+          <form id="report-form" autocomplete="off">
+            
+            <!-- Step 1: Select Application -->
+            <div class="mb-4">
+              <label for="report-app" class="al-label">Select Application *</label>
+              <select id="report-app" name="appId" class="al-input" required>
+                <!-- Populated via JS -->
+              </select>
+            </div>
+
+            <!-- Step 2: Version & Device Grid -->
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <label for="report-version" class="al-label">Application Version *</label>
+                <input 
+                  type="text" 
+                  id="report-version" 
+                  name="appVersion" 
+                  class="al-input" 
+                  placeholder="e.g. 2.24.20.12" 
+                  required
+                >
+              </div>
+
+              <div class="col-md-6">
+                <label for="report-device" class="al-label">Your Device Model *</label>
+                <input 
+                  type="text" 
+                  id="report-device" 
+                  name="device" 
+                  class="al-input" 
+                  placeholder="e.g. Samsung S24, iPhone 15 Pro" 
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="report-os" class="al-label">Operating System / Skin (Optional)</label>
+              <input 
+                type="text" 
+                id="report-os" 
+                name="osVersion" 
+                class="al-input" 
+                placeholder="e.g. Android 14 (One UI 6.1) or iOS 18"
+              >
+            </div>
+
+            <!-- Step 3: Issue Type Picker -->
+            <div class="mb-4">
+              <label class="al-label">Category of Observation *</label>
+              <div id="issue-type-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.25rem;">
+                <!-- Populated via JS -->
+              </div>
+              <input type="hidden" id="report-issue-type" name="issueType" value="Bug" required>
+            </div>
+
+            <!-- Step 4: Overall Rating (1 to 5) -->
+            <div class="mb-4">
+              <label class="al-label">Your Rating for this Build</label>
+              <div id="star-picker" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                <!-- Dynamic clickable stars -->
+              </div>
+              <input type="hidden" id="report-rating" name="rating" value="4">
+            </div>
+
+            <!-- Step 5: Report Title & Content -->
+            <div class="mb-4">
+              <label for="report-title" class="al-label">Summary Title *</label>
+              <input 
+                type="text" 
+                id="report-title" 
+                name="title" 
+                class="al-input" 
+                placeholder="Brief summary (e.g. Battery drain after 20 minutes of use)" 
+                required
+              >
+            </div>
+
+            <div class="mb-4">
+              <label for="report-content" class="al-label">Detailed Experience *</label>
+              <textarea 
+                id="report-content" 
+                name="content" 
+                class="al-input" 
+                rows="4" 
+                placeholder="Describe what happened, battery percentages, reproduction steps, or workarounds you discovered..." 
+                required
+              ></textarea>
+            </div>
+
+            <div class="mb-4">
+              <label for="report-user" class="al-label">Display Name (Optional)</label>
+              <input 
+                type="text" 
+                id="report-user" 
+                name="user" 
+                class="al-input" 
+                placeholder="e.g. Alex K. (defaults to Community Member)"
+              >
+            </div>
+
+            <!-- Submit Action -->
+            <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 1.25rem; border-top: 1px solid var(--al-border-subtle);">
+              <span style="font-size: 0.8125rem; color: var(--al-text-muted);">
+                Posts instantly to community feed
+              </span>
+
+              <button type="submit" class="al-btn al-btn-primary al-btn-lg">
+                <span>Submit Report</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="al-mobile-bottom-nav">
+    <a href="index.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+      <span>Home</span>
+    </a>
+    <a href="explore.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <span>Explore</span>
+    </a>
+    <a href="updates.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+      <span>Updates</span>
+    </a>
+    <a href="community.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      <span>Community</span>
+    </a>
+    <a href="profile.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="al-footer">
+    <div class="al-shell">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+        <div>
+          <div style="font-weight: 700; color: var(--al-text-main); margin-bottom: 0.25rem;">AppLens</div>
+          <p style="margin: 0; font-size: 0.8125rem;">A community-driven application intelligence platform.</p>
+        </div>
+        <div class="al-footer-links">
+          <a href="explore.html">Explore Apps</a>
+          <a href="updates.html">Before You Update</a>
+          <a href="submit-report.html">Submit Report</a>
+          <a href="admin.html">System Admin</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/animations.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const preselectedApp = urlParams.get("id") || "whatsapp";
+      const preselectedVersion = urlParams.get("version") || "";
+
+      const appSelect = document.getElementById("report-app");
+      const versionInput = document.getElementById("report-version");
+      const issueChipsContainer = document.getElementById("issue-type-chips");
+      const issueInput = document.getElementById("report-issue-type");
+      const starContainer = document.getElementById("star-picker");
+      const ratingInput = document.getElementById("report-rating");
+      const form = document.getElementById("report-form");
+
+      // Populate Apps Select
+      if (window.APPLENS_DATA) {
+        window.APPLENS_DATA.apps.forEach(app => {
+          const opt = document.createElement("option");
+          opt.value = app.id;
+          opt.textContent = `${app.name} (${app.developer})`;
+          if (app.id === preselectedApp) {
+            opt.selected = true;
+            if (!preselectedVersion) {
+              versionInput.value = app.currentVersion;
+            }
+          }
+          appSelect.appendChild(opt);
+        });
+
+        if (preselectedVersion) {
+          versionInput.value = preselectedVersion;
+        }
+
+        // When app changes, auto-fill current version
+        appSelect.addEventListener("change", function () {
+          const selected = window.AppLens.getAppById(this.value);
+          if (selected) {
+            versionInput.value = selected.currentVersion;
+          }
+        });
+      }
+
+      // Populate Issue Types Chips
+      const issueTypes = window.APPLENS_DATA ? window.APPLENS_DATA.issueTypes : [];
+      let selectedIssue = "Bug";
+
+      issueTypes.forEach((it, index) => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = `al-btn al-btn-sm ${it.id === selectedIssue ? 'al-btn-primary' : 'al-btn-secondary'}`;
+        chip.textContent = it.label;
+        chip.title = it.desc;
+        chip.addEventListener("click", () => {
+          selectedIssue = it.id;
+          issueInput.value = it.id;
+          issueChipsContainer.querySelectorAll("button").forEach(b => {
+            b.className = "al-btn al-btn-sm al-btn-secondary";
+          });
+          chip.className = "al-btn al-btn-sm al-btn-primary";
+        });
+        issueChipsContainer.appendChild(chip);
+      });
+
+      // Interactive Star Rating
+      let currentRating = 4;
+      function renderStarPicker() {
+        let html = "";
+        for (let i = 1; i <= 5; i++) {
+          const fill = i <= currentRating ? "#F59E0B" : "#D1D5DB";
+          html += `
+            <svg data-val="${i}" class="star-item" width="26" height="26" viewBox="0 0 24 24" fill="${fill}" style="transition: transform 120ms ease;">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          `;
+        }
+        html += `<span style="font-weight: 600; margin-left: 0.5rem; font-size: 0.9375rem;">${currentRating} / 5</span>`;
+        starContainer.innerHTML = html;
+
+        starContainer.querySelectorAll(".star-item").forEach(star => {
+          star.addEventListener("click", function () {
+            currentRating = parseInt(this.getAttribute("data-val"), 10);
+            ratingInput.value = currentRating;
+            renderStarPicker();
+          });
+        });
+      }
+      renderStarPicker();
+
+      // Form submission handling
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const formData = {
+          appId: appSelect.value,
+          appVersion: versionInput.value.trim(),
+          device: document.getElementById("report-device").value.trim(),
+          osVersion: document.getElementById("report-os").value.trim() || "Latest OS",
+          issueType: issueInput.value,
+          rating: ratingInput.value,
+          title: document.getElementById("report-title").value.trim(),
+          content: document.getElementById("report-content").value.trim(),
+          user: document.getElementById("report-user").value.trim() || "Community Member"
+        };
+
+        const result = window.AppLens.submitReport(formData);
+
+        if (result) {
+          window.AppLens.showToast("Report submitted successfully!", "success");
+          setTimeout(() => {
+            window.location.href = `community.html?id=${formData.appId}`;
+          }, 600);
+        } else {
+          window.AppLens.showToast("Failed to save report.", "info");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

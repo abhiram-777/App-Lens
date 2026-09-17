@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Before You Update — AppLens</title>
+  <meta name="description" content="Compare your installed version with the latest release before updating. Understand permission changes, new bugs, and community reports.">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Top Acrylic Glass Navigation -->
+  <header class="al-header al-glass">
+    <div class="al-shell">
+      <div class="al-header-inner">
+        <a href="index.html" class="al-logo">
+          <div class="al-logo-mark">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <span>AppLens</span>
+        </a>
+
+        <ul class="al-nav-links">
+          <li><a href="explore.html" class="al-nav-link">Explore</a></li>
+          <li><a href="updates.html" class="al-nav-link active">Updates</a></li>
+          <li><a href="community.html" class="al-nav-link">Community</a></li>
+        </ul>
+
+        <div class="al-header-actions">
+          <button class="al-header-search-trigger js-search-trigger" type="button" aria-label="Open search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span>Search apps...</span>
+            <kbd class="al-kbd-hint">Ctrl K</kbd>
+          </button>
+
+          <a href="submit-report.html" class="al-btn al-btn-primary al-header-report-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Submit Report</span>
+          </a>
+
+          <a href="profile.html" class="al-btn al-btn-subtle" style="padding: 0.5rem; border-radius: var(--al-radius-full);" title="My Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="al-main">
+    <div class="al-shell">
+      
+      <!-- App Selection Tabs / Header -->
+      <section class="al-app-detail-hero">
+        <div class="al-app-hero-main">
+          <div id="app-icon-container" class="al-app-icon lg"></div>
+          <div class="al-app-hero-details">
+            <h1 id="app-name" class="al-app-hero-title mb-1">Application Name</h1>
+            <div class="al-app-hero-meta">
+              <span id="app-developer" style="font-weight: 550; color: var(--al-text-main);">Developer</span>
+              <span>•</span>
+              <span id="app-category" class="al-badge al-badge-neutral">Category</span>
+            </div>
+          </div>
+          
+          <!-- App Switcher Dropdown for ease of testing -->
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.8125rem; color: var(--al-text-muted); font-weight: 600;">Inspect App:</span>
+            <select id="update-app-select" class="al-input" style="width: auto; padding: 0.45rem 0.875rem; font-size: 0.875rem;">
+              <!-- Populated via JS -->
+            </select>
+          </div>
+        </div>
+
+        <div class="al-app-tabs-bar">
+          <a id="tab-overview" href="#" class="al-app-tab">Overview</a>
+          <a id="tab-privacy" href="#" class="al-app-tab">Privacy & Permissions</a>
+          <a id="tab-update" href="#" class="al-app-tab active">Before You Update</a>
+          <a id="tab-versions" href="#" class="al-app-tab">Version History</a>
+          <a id="tab-community" href="#" class="al-app-tab">Community Experiences</a>
+        </div>
+      </section>
+
+      <!-- Page Intro Headline -->
+      <div style="max-width: 780px; margin: 2rem 0 1.75rem;">
+        <h2 style="font-size: 1.875rem; margin-bottom: 0.5rem;">Before you update, know what changed.</h2>
+        <p style="color: var(--al-text-secondary); font-size: 1.0625rem; line-height: 1.6; margin: 0;">
+          A side-by-side comparison of your current version against the incoming release. Check if new permissions were added, what bugs were resolved, and see if other community members on your device have experienced issues.
+        </p>
+      </div>
+
+      <!-- Version Flow Ribbon -->
+      <div class="al-version-flow">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 0.8125rem; font-weight: 600; color: var(--al-text-muted); text-transform: uppercase;">Installed</span>
+          <span id="ver-from" class="al-version-bubble current">v2.24.18.8</span>
+        </div>
+
+        <div style="color: var(--al-text-muted);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 0.8125rem; font-weight: 600; color: var(--al-text-muted); text-transform: uppercase;">Latest Release</span>
+          <span id="ver-to" class="al-version-bubble target">v2.24.20.12</span>
+        </div>
+
+        <div style="margin-left: auto; font-size: 0.875rem; color: var(--al-text-secondary);">
+          Released: <strong id="ver-date">-</strong>
+        </div>
+      </div>
+
+      <!-- Verdict Banner (Decision Support) -->
+      <div id="verdict-card" class="al-card mb-4" style="background: var(--al-surface); border-left: 4px solid var(--al-red);">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
+              <span id="verdict-badge" class="al-badge al-badge-safe">Verified Safe</span>
+              <h3 style="font-size: 1.15rem; margin: 0; font-weight: 700;">Community Update Verdict</h3>
+            </div>
+            <p id="verdict-summary" style="font-size: 0.9375rem; color: var(--al-text-main); margin: 0; line-height: 1.5;"></p>
+          </div>
+
+          <a id="btn-report-version-issue" href="submit-report.html" class="al-btn al-btn-secondary al-btn-sm">
+            Report an issue with this version
+          </a>
+        </div>
+      </div>
+
+      <!-- Detailed Diff Grid -->
+      <div class="row g-4 mb-5">
+        
+        <!-- Left: Permissions Changes & Known Issues -->
+        <div class="col-lg-6">
+          
+          <!-- 1. Permission Changes -->
+          <div class="al-card mb-4">
+            <div class="al-diff-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--al-red)" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <span>Permission Changes</span>
+            </div>
+            <p style="font-size: 0.8125rem; color: var(--al-text-muted); margin-bottom: 1rem;">
+              Did the developers request access to more device sensors?
+            </p>
+            <div id="diff-permissions" class="al-diff-list">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- 2. Known Issues & Device Hotspots -->
+          <div class="al-card">
+            <div class="al-diff-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              <span>Device-Specific Observations</span>
+            </div>
+            <p style="font-size: 0.8125rem; color: var(--al-text-muted); margin-bottom: 1rem;">
+              Reports affecting specific hardware chips, Android skins, or iOS versions.
+            </p>
+            <div id="diff-known-issues" class="al-diff-list">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: New Features & Bug Fixes -->
+        <div class="col-lg-6">
+          
+          <!-- 3. New Features -->
+          <div class="al-card mb-4">
+            <div class="al-diff-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 8 12 12 14 14"></polyline>
+              </svg>
+              <span>New Features in this Release</span>
+            </div>
+            <div id="diff-features" class="al-diff-list">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- 4. Bug Fixes -->
+          <div class="al-card">
+            <div class="al-diff-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+              </svg>
+              <span>Resolved Issues & Fixes</span>
+            </div>
+            <div id="diff-fixes" class="al-diff-list">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="al-mobile-bottom-nav">
+    <a href="index.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+      <span>Home</span>
+    </a>
+    <a href="explore.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <span>Explore</span>
+    </a>
+    <a href="updates.html" class="al-mobile-nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+      <span>Updates</span>
+    </a>
+    <a href="community.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      <span>Community</span>
+    </a>
+    <a href="profile.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="al-footer">
+    <div class="al-shell">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+        <div>
+          <div style="font-weight: 700; color: var(--al-text-main); margin-bottom: 0.25rem;">AppLens</div>
+          <p style="margin: 0; font-size: 0.8125rem;">A community-driven application intelligence platform.</p>
+        </div>
+        <div class="al-footer-links">
+          <a href="explore.html">Explore Apps</a>
+          <a href="updates.html">Before You Update</a>
+          <a href="submit-report.html">Submit Report</a>
+          <a href="admin.html">System Admin</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/animations.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const currentAppId = window.AppLens.getQueryAppId();
+      const app = window.AppLens.getAppById(currentAppId);
+      if (!app) return;
+
+      document.title = `Before You Update — ${app.name} — AppLens`;
+
+      // Set Tab Links
+      document.getElementById("tab-overview").href = `application.html?id=${app.id}`;
+      document.getElementById("tab-privacy").href = `privacy.html?id=${app.id}`;
+      document.getElementById("tab-update").href = `updates.html?id=${app.id}`;
+      document.getElementById("tab-versions").href = `versions.html?id=${app.id}`;
+      document.getElementById("tab-community").href = `community.html?id=${app.id}`;
+      document.getElementById("btn-report-version-issue").href = `submit-report.html?id=${app.id}&version=${app.currentVersion}`;
+
+      // Populate App Header
+      document.getElementById("app-icon-container").innerHTML = app.icon;
+      document.getElementById("app-name").textContent = app.name;
+      document.getElementById("app-developer").textContent = app.developer;
+      document.getElementById("app-category").textContent = app.category;
+
+      // Populate App Switcher dropdown
+      const selectEl = document.getElementById("update-app-select");
+      if (selectEl && window.APPLENS_DATA) {
+        window.APPLENS_DATA.apps.forEach(a => {
+          const opt = document.createElement("option");
+          opt.value = a.id;
+          opt.textContent = a.name;
+          if (a.id === app.id) opt.selected = true;
+          selectEl.appendChild(opt);
+        });
+
+        selectEl.addEventListener("change", function () {
+          window.location.href = `updates.html?id=${this.value}`;
+        });
+      }
+
+      // Populate Version Flow
+      const comp = app.updateComparison;
+      document.getElementById("ver-from").textContent = `v${comp.fromVersion}`;
+      document.getElementById("ver-to").textContent = `v${comp.toVersion}`;
+      document.getElementById("ver-date").textContent = comp.releaseDate;
+
+      // Populate Verdict Card
+      const verdictBadge = document.getElementById("verdict-badge");
+      const verdictCard = document.getElementById("verdict-card");
+      if (app.updateVerdict === "warning") {
+        verdictBadge.className = "al-badge al-badge-warning";
+        verdictBadge.textContent = "Caution Advised";
+        verdictCard.style.borderLeftColor = "#DC2626";
+      } else if (app.updateVerdict === "caution") {
+        verdictBadge.className = "al-badge al-badge-caution";
+        verdictBadge.textContent = "Review Update";
+        verdictCard.style.borderLeftColor = "#D97706";
+      } else {
+        verdictBadge.className = "al-badge al-badge-safe";
+        verdictBadge.textContent = "Verified Safe";
+        verdictCard.style.borderLeftColor = "#16A34A";
+      }
+      document.getElementById("verdict-summary").textContent = comp.communityVerdictText;
+
+      // 1. Permission Changes
+      const permDiffContainer = document.getElementById("diff-permissions");
+      let permHtml = "";
+      if (comp.permissionChanges && comp.permissionChanges.length > 0) {
+        comp.permissionChanges.forEach(p => {
+          const isModified = p.type === "modified";
+          const icon = isModified
+            ? `<span style="color: #D97706; font-weight: 700;">•</span>`
+            : `<span style="color: #16A34A; font-weight: 700;">✓</span>`;
+          
+          permHtml += `
+            <div class="al-diff-item">
+              <div style="font-size: 1.1rem; line-height: 1; flex-shrink: 0; margin-top: 1px;">${icon}</div>
+              <div>
+                <strong style="color: var(--al-text-main); font-size: 0.9375rem;">${p.name}</strong>
+                <p style="margin: 0.2rem 0 0; color: var(--al-text-secondary); font-size: 0.875rem; line-height: 1.45;">
+                  ${p.detail}
+                </p>
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        permHtml = `<div class="al-diff-item">No permission changes detected in this release.</div>`;
+      }
+      permDiffContainer.innerHTML = permHtml;
+
+      // 2. Known Issues
+      const knownContainer = document.getElementById("diff-known-issues");
+      let knownHtml = "";
+      if (comp.knownIssues && comp.knownIssues.length > 0) {
+        comp.knownIssues.forEach(k => {
+          knownHtml += `
+            <div class="al-diff-item" style="border-left: 3px solid #D97706;">
+              <div>
+                <span class="al-badge al-badge-caution" style="font-size: 0.7rem; margin-bottom: 0.35rem;">${k.device}</span>
+                <p style="margin: 0; color: var(--al-text-main); font-size: 0.875rem; line-height: 1.45;">
+                  ${k.description}
+                </p>
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        knownHtml = `
+          <div class="al-diff-item" style="color: #16A34A; font-weight: 500;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>No widespread device regressions reported for this build.</span>
+          </div>
+        `;
+      }
+      knownContainer.innerHTML = knownHtml;
+
+      // 3. New Features
+      const featContainer = document.getElementById("diff-features");
+      let featHtml = "";
+      comp.newFeatures.forEach(f => {
+        featHtml += `
+          <div class="al-diff-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span style="color: var(--al-text-main);">${f}</span>
+          </div>
+        `;
+      });
+      featContainer.innerHTML = featHtml;
+
+      // 4. Bug Fixes
+      const fixContainer = document.getElementById("diff-fixes");
+      let fixHtml = "";
+      comp.fixes.forEach(fx => {
+        fixHtml += `
+          <div class="al-diff-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span style="color: var(--al-text-main);">${fx}</span>
+          </div>
+        `;
+      });
+      fixContainer.innerHTML = fixHtml;
+    });
+  </script>
+</body>
+</html>

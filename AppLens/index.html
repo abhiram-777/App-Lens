@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AppLens — Know what’s inside before you install</title>
+  <meta name="description" content="A community-driven application intelligence platform. Explore permissions, version changes and real experiences from real users.">
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- AppLens Core Design System -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Top Acrylic Glass Navigation -->
+  <header class="al-header al-glass">
+    <div class="al-shell">
+      <div class="al-header-inner">
+        <!-- Logo -->
+        <a href="index.html" class="al-logo">
+          <div class="al-logo-mark">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <span>AppLens</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="al-nav-links">
+          <li><a href="explore.html" class="al-nav-link">Explore</a></li>
+          <li><a href="updates.html" class="al-nav-link">Updates</a></li>
+          <li><a href="community.html" class="al-nav-link">Community</a></li>
+        </ul>
+
+        <!-- Search Trigger & Actions -->
+        <div class="al-header-actions">
+          <button class="al-header-search-trigger js-search-trigger" type="button" aria-label="Open search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span>Search apps...</span>
+            <kbd class="al-kbd-hint">Ctrl K</kbd>
+          </button>
+
+          <a href="submit-report.html" class="al-btn al-btn-primary al-header-report-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Submit Report</span>
+          </a>
+
+          <a href="profile.html" class="al-btn al-btn-subtle" style="padding: 0.5rem; border-radius: var(--al-radius-full);" title="My Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="al-main">
+    <div class="al-shell">
+      
+      <!-- Minimal Hero -->
+      <section class="al-hero">
+        <h1 class="al-hero-title">Know what’s inside before you install.</h1>
+        <p class="al-hero-subtitle">
+          Explore permissions, version changes and real experiences from people who actually use the app.
+        </p>
+
+        <!-- Central Search Bar -->
+        <div class="al-hero-search">
+          <svg class="al-hero-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input 
+            type="text" 
+            class="al-hero-search-input js-search-trigger" 
+            placeholder="Search an app, developer or package name…" 
+            readonly
+          >
+          <kbd class="al-hero-search-kbd al-kbd-hint">Ctrl K</kbd>
+        </div>
+      </section>
+
+      <!-- Curated Selection of Popular Applications -->
+      <section style="margin-top: 1rem; margin-bottom: 4rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
+          <div>
+            <h2 style="font-size: 1.35rem; margin-bottom: 0.2rem;">Featured Applications</h2>
+            <p style="margin: 0; font-size: 0.875rem; color: var(--al-text-muted);">Carefully inspected community entries</p>
+          </div>
+          <a href="explore.html" class="al-btn al-btn-subtle al-btn-sm" style="font-weight: 600;">
+            Browse All Apps
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </a>
+        </div>
+
+        <!-- App Grid Container (Populated dynamically) -->
+        <div id="home-featured-grid" class="al-app-grid">
+          <!-- Populated via JavaScript for clean maintainability -->
+        </div>
+      </section>
+
+      <!-- Calm Product Philosophy Explainer -->
+      <section style="border-top: 1px solid var(--al-border); padding-top: 3.5rem;">
+        <div style="max-width: 680px; margin: 0 auto; text-align: center; margin-bottom: 2.5rem;">
+          <h2 style="font-size: 1.75rem; margin-bottom: 0.5rem;">Everything you need to know, before you need to know it.</h2>
+          <p style="font-size: 1rem; color: var(--al-text-secondary);">
+            AppLens is built on genuine community reports and transparent data, not marketing copy or automated scores.
+          </p>
+        </div>
+
+        <div class="al-feature-triad">
+          <!-- Pillar 1 -->
+          <div class="al-feature-triad-card">
+            <div class="al-feature-triad-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Privacy, explained.</h3>
+            <p style="font-size: 0.875rem; color: var(--al-text-secondary); margin: 0; line-height: 1.55;">
+              Every technical permission translated into plain human language. Know why the app needs it and whether it runs in the background.
+            </p>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="al-feature-triad-card">
+            <div class="al-feature-triad-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Before You Update.</h3>
+            <p style="font-size: 0.875rem; color: var(--al-text-secondary); margin: 0; line-height: 1.55;">
+              Compare your installed version with the latest release. Review permission additions, battery drain reports, and bug fixes before hitting update.
+            </p>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="al-feature-triad-card">
+            <div class="al-feature-triad-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Real-world reports.</h3>
+            <p style="font-size: 0.875rem; color: var(--al-text-secondary); margin: 0; line-height: 1.55;">
+              Real experiences from verified users categorized by device model and OS version. No promotional fluff or bot reviews.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="al-mobile-bottom-nav">
+    <a href="index.html" class="al-mobile-nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+      </svg>
+      <span>Home</span>
+    </a>
+    <a href="explore.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <span>Explore</span>
+    </a>
+    <a href="updates.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <polyline points="23 4 23 10 17 10"></polyline>
+        <polyline points="1 20 1 14 7 14"></polyline>
+        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+      </svg>
+      <span>Updates</span>
+    </a>
+    <a href="community.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+      <span>Community</span>
+    </a>
+    <a href="profile.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="al-footer">
+    <div class="al-shell">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+        <div>
+          <div style="font-weight: 700; color: var(--al-text-main); margin-bottom: 0.25rem;">AppLens</div>
+          <p style="margin: 0; font-size: 0.8125rem;">A community-driven application intelligence platform.</p>
+        </div>
+        <div class="al-footer-links">
+          <a href="explore.html">Explore Apps</a>
+          <a href="updates.html">Before You Update</a>
+          <a href="submit-report.html">Submit Report</a>
+          <a href="admin.html">System Admin</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/animations.js"></script>
+
+  <script>
+    // Render curated 6 apps on home page
+    document.addEventListener("DOMContentLoaded", function () {
+      const container = document.getElementById("home-featured-grid");
+      if (!container || !window.APPLENS_DATA) return;
+
+      const featured = window.APPLENS_DATA.apps.slice(0, 6);
+      let html = "";
+
+      featured.forEach(app => {
+        html += `
+          <a href="application.html?id=${app.id}" class="al-app-card">
+            <div class="al-app-card-top">
+              <div class="al-app-icon">
+                ${app.icon}
+              </div>
+              <div class="al-app-card-info">
+                <div class="al-app-card-name">${app.name}</div>
+                <div class="al-app-card-dev">${app.developer}</div>
+                <span class="al-badge al-badge-neutral">${app.category}</span>
+              </div>
+            </div>
+            
+            <div class="al-app-card-desc">
+              ${app.shortDescription}
+            </div>
+
+            <div class="al-app-card-footer">
+              <div style="display: flex; align-items: center; gap: 0.35rem; font-weight: 600;">
+                <svg class="al-rating-star" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <span>${app.rating}</span>
+                <span style="color: var(--al-text-muted); font-weight: 400;">(${app.totalRatings.toLocaleString()})</span>
+              </div>
+              <span class="al-btn al-btn-secondary al-btn-sm" style="pointer-events: none;">View App</span>
+            </div>
+          </a>
+        `;
+      });
+
+      container.innerHTML = html;
+    });
+  </script>
+</body>
+</html>

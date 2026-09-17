@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Administration — AppLens</title>
+  <meta name="description" content="AppLens System Administration, application directory management, version telemetry, and report moderation.">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Top Acrylic Glass Navigation -->
+  <header class="al-header al-glass">
+    <div class="al-shell">
+      <div class="al-header-inner">
+        <a href="index.html" class="al-logo">
+          <div class="al-logo-mark">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <span>AppLens</span>
+          <span class="al-badge al-badge-red ms-2" style="font-size: 0.65rem; padding: 0.15rem 0.45rem;">ADMIN</span>
+        </a>
+
+        <ul class="al-nav-links">
+          <li><a href="explore.html" class="al-nav-link">Explore</a></li>
+          <li><a href="updates.html" class="al-nav-link">Updates</a></li>
+          <li><a href="community.html" class="al-nav-link">Community</a></li>
+        </ul>
+
+        <div class="al-header-actions">
+          <button class="al-header-search-trigger js-search-trigger" type="button" aria-label="Open search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span>Search apps...</span>
+            <kbd class="al-kbd-hint">Ctrl K</kbd>
+          </button>
+
+          <a href="index.html" class="al-btn al-btn-secondary al-btn-sm">
+            Exit to Store
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="al-main">
+    <div class="al-shell">
+      
+      <!-- Admin Header Banner -->
+      <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h1 style="font-size: 2rem; margin-bottom: 0.25rem;">Application Intelligence Console</h1>
+          <p style="color: var(--al-text-secondary); margin: 0; font-size: 0.9375rem;">
+            Manage catalog entries, inspect update diffs, audit permission translations, and moderate community reports.
+          </p>
+        </div>
+
+        <button class="al-btn al-btn-primary" data-bs-toggle="modal" data-bs-target="#newAppModal">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>Register New Application</span>
+        </button>
+      </div>
+
+      <!-- Minimal Calm Overview Counters (AppLens style, not generic dashboard) -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2.25rem;">
+        <div class="al-card" style="padding: 1.25rem;">
+          <span class="al-label">Tracked Applications</span>
+          <div style="font-size: 1.75rem; font-weight: 700; color: var(--al-text-main);">8</div>
+          <span style="font-size: 0.75rem; color: var(--al-text-muted);">Active mobile entries</span>
+        </div>
+
+        <div class="al-card" style="padding: 1.25rem;">
+          <span class="al-label">Pending Community Reports</span>
+          <div style="font-size: 1.75rem; font-weight: 700; color: var(--al-red);">3</div>
+          <span style="font-size: 0.75rem; color: var(--al-text-muted);">Requires moderation</span>
+        </div>
+
+        <div class="al-card" style="padding: 1.25rem;">
+          <span class="al-label">Verified Active Users</span>
+          <div style="font-size: 1.75rem; font-weight: 700; color: var(--al-text-main);">4,820</div>
+          <span style="font-size: 0.75rem; color: var(--al-text-muted);">Community contributors</span>
+        </div>
+
+        <div class="al-card" style="padding: 1.25rem;">
+          <span class="al-label">Daily Verifications</span>
+          <div style="font-size: 1.75rem; font-weight: 700; color: #16A34A;">142</div>
+          <span style="font-size: 0.75rem; color: var(--al-text-muted);">Hardware cross-checks</span>
+        </div>
+      </div>
+
+      <!-- Admin Control Tabs -->
+      <div style="margin-bottom: 1.75rem;">
+        <div class="al-app-tabs-bar" style="border-top: none; padding-top: 0;">
+          <button class="al-app-tab active" data-admin-tab="apps">Applications Directory</button>
+          <button class="al-app-tab" data-admin-tab="reports">Report Moderation Queue</button>
+          <button class="al-app-tab" data-admin-tab="versions">Version Management</button>
+          <button class="al-app-tab" data-admin-tab="taxonomy">Permissions Taxonomy</button>
+        </div>
+      </div>
+
+      <!-- Tab Pane 1: Applications Directory -->
+      <div id="admin-pane-apps" class="admin-tab-pane">
+        <div class="al-card" style="padding: 0; overflow: hidden;">
+          <div style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--al-border); display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-size: 1.1rem; margin: 0;">Catalog Applications</h3>
+            <span style="font-size: 0.8125rem; color: var(--al-text-muted);">Showing all registered packages</span>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem; text-align: left;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--al-border); background: var(--al-surface-alt); color: var(--al-text-secondary); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                  <th style="padding: 0.75rem 1.5rem;">Application</th>
+                  <th style="padding: 0.75rem 1rem;">Developer</th>
+                  <th style="padding: 0.75rem 1rem;">Category</th>
+                  <th style="padding: 0.75rem 1rem;">Latest Version</th>
+                  <th style="padding: 0.75rem 1rem;">Update State</th>
+                  <th style="padding: 0.75rem 1.5rem; text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-apps-tbody">
+                <!-- Rendered via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Pane 2: Report Moderation Queue -->
+      <div id="admin-pane-reports" class="admin-tab-pane" style="display: none;">
+        <div class="al-card" style="padding: 0; overflow: hidden;">
+          <div style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--al-border); display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-size: 1.1rem; margin: 0;">Report Moderation Queue</h3>
+            <span style="font-size: 0.8125rem; color: var(--al-text-muted);">Audit reports before public verified tagging</span>
+          </div>
+
+          <div id="admin-moderation-list" style="padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Pane 3: Version Management -->
+      <div id="admin-pane-versions" class="admin-tab-pane" style="display: none;">
+        <div class="al-card" style="padding: 1.5rem;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Version Release & Diff Editor</h3>
+          <p style="font-size: 0.875rem; color: var(--al-text-secondary); margin-bottom: 1.5rem;">
+            Configure Before-You-Update telemetry flags for newly released builds.
+          </p>
+
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="al-label">Select Application</label>
+              <select id="admin-ver-app-select" class="al-input">
+                <!-- Populated via JS -->
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="al-label">Target Build Version</label>
+              <input type="text" id="admin-ver-num" class="al-input" value="2.24.20.12">
+            </div>
+            <div class="col-md-4">
+              <label class="al-label">Community Verdict Flag</label>
+              <select id="admin-ver-verdict" class="al-input">
+                <option value="safe">Safe to update (Green)</option>
+                <option value="caution">Caution / Review required (Amber)</option>
+                <option value="warning">Warning / Severe issue (Red)</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="al-label">Verdict Summary Note</label>
+              <input type="text" class="al-input" value="Safe to update for most users. Minor battery report on Samsung One UI 6.1, resolved in hotfix.">
+            </div>
+            <div class="col-12 pt-2">
+              <button class="al-btn al-btn-primary al-btn-sm" onclick="AppLens.showToast('Version flags updated successfully!', 'success');">
+                Save Version Telemetry
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Pane 4: Permissions Taxonomy -->
+      <div id="admin-pane-taxonomy" class="admin-tab-pane" style="display: none;">
+        <div class="al-card" style="padding: 1.5rem;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Human Permission Translations Dictionary</h3>
+          <p style="font-size: 0.875rem; color: var(--al-text-secondary); margin-bottom: 1.5rem;">
+            Standardized human-language translations applied across apps when analyzing permission manifests.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div style="padding: 1rem; background: var(--al-surface-alt); border-radius: var(--al-radius-md); border: 1px solid var(--al-border);">
+              <div style="font-weight: 650; font-size: 0.9375rem; margin-bottom: 0.2rem;">Camera (android.permission.CAMERA)</div>
+              <div style="font-size: 0.8125rem; color: var(--al-text-secondary);">Only active when taking photos or in active video calls. Does not record in background.</div>
+            </div>
+            <div style="padding: 1rem; background: var(--al-surface-alt); border-radius: var(--al-radius-md); border: 1px solid var(--al-border);">
+              <div style="font-weight: 650; font-size: 0.9375rem; margin-bottom: 0.2rem;">Record Audio (android.permission.RECORD_AUDIO)</div>
+              <div style="font-size: 0.8125rem; color: var(--al-text-secondary);">Activates during microphone capture. Operating system green indicator visualizes usage.</div>
+            </div>
+            <div style="padding: 1rem; background: var(--al-surface-alt); border-radius: var(--al-radius-md); border: 1px solid var(--al-border);">
+              <div style="font-weight: 650; font-size: 0.9375rem; margin-bottom: 0.2rem;">Fine Location (android.permission.ACCESS_FINE_LOCATION)</div>
+              <div style="font-size: 0.8125rem; color: var(--al-text-secondary);">Exact GPS coordinates. Users are warned if background location tracking is permitted.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Register Application Modal -->
+  <div class="modal fade" id="newAppModal" tabindex="-1" aria-labelledby="newAppModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border-radius: var(--al-radius-xl); border: 1px solid var(--al-border); box-shadow: var(--al-shadow-lg);">
+        <div class="modal-header" style="border-bottom: 1px solid var(--al-border); padding: 1.25rem 1.5rem;">
+          <h5 class="modal-title" id="newAppModalLabel" style="font-size: 1.2rem; font-weight: 700;">Add New Application</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="new-app-form">
+          <div class="modal-body" style="padding: 1.5rem;">
+            <div class="mb-3">
+              <label class="al-label">Application Title *</label>
+              <input type="text" class="al-input" placeholder="e.g. Proton Mail" required>
+            </div>
+            <div class="mb-3">
+              <label class="al-label">Developer *</label>
+              <input type="text" class="al-input" placeholder="e.g. Proton AG" required>
+            </div>
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <label class="al-label">Category *</label>
+                <select class="al-input">
+                  <option>Communication</option>
+                  <option>Privacy & Messaging</option>
+                  <option>Productivity</option>
+                  <option>Music & Audio</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <label class="al-label">Initial Version *</label>
+                <input type="text" class="al-input" placeholder="1.0.0" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="al-label">Package Name (Android / iOS) *</label>
+              <input type="text" class="al-input" placeholder="ch.protonmail.android" required>
+            </div>
+            <div class="mb-3">
+              <label class="al-label">Short Summary *</label>
+              <input type="text" class="al-input" placeholder="End-to-end encrypted email client." required>
+            </div>
+          </div>
+          <div class="modal-footer" style="border-top: 1px solid var(--al-border); padding: 1rem 1.5rem;">
+            <button type="button" class="al-btn al-btn-secondary al-btn-sm" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="al-btn al-btn-primary al-btn-sm">Save Application</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="al-mobile-bottom-nav">
+    <a href="index.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+      <span>Home</span>
+    </a>
+    <a href="explore.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <span>Explore</span>
+    </a>
+    <a href="updates.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+      <span>Updates</span>
+    </a>
+    <a href="community.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      <span>Community</span>
+    </a>
+    <a href="profile.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="al-footer">
+    <div class="al-shell">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+        <div>
+          <div style="font-weight: 700; color: var(--al-text-main); margin-bottom: 0.25rem;">AppLens System Console</div>
+          <p style="margin: 0; font-size: 0.8125rem;">Administrator permissions granted.</p>
+        </div>
+        <div class="al-footer-links">
+          <a href="index.html">Store Front</a>
+          <a href="explore.html">Catalog</a>
+          <a href="community.html">Community</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/animations.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // 1. Admin Tab Navigation
+      const tabs = document.querySelectorAll(".al-app-tab[data-admin-tab]");
+      tabs.forEach(tab => {
+        tab.addEventListener("click", function () {
+          tabs.forEach(t => t.classList.remove("active"));
+          this.classList.add("active");
+
+          const target = this.getAttribute("data-admin-tab");
+          document.querySelectorAll(".admin-tab-pane").forEach(pane => {
+            pane.style.display = "none";
+          });
+          document.getElementById(`admin-pane-${target}`).style.display = "block";
+        });
+      });
+
+      // 2. Render Apps Table
+      const tbody = document.getElementById("admin-apps-tbody");
+      if (tbody && window.APPLENS_DATA) {
+        let html = "";
+        window.APPLENS_DATA.apps.forEach(app => {
+          const badge = app.updateVerdict === "warning"
+            ? `<span class="al-badge al-badge-warning">Issue Reported</span>`
+            : (app.updateVerdict === "caution" ? `<span class="al-badge al-badge-caution">Caution</span>` : `<span class="al-badge al-badge-safe">Stable</span>`);
+
+          html += `
+            <tr style="border-bottom: 1px solid var(--al-border-subtle);">
+              <td style="padding: 1rem 1.5rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <div class="al-app-icon sm" style="width: 32px; height: 32px; border-radius: 8px;">
+                    ${app.icon}
+                  </div>
+                  <div>
+                    <div style="font-weight: 650; color: var(--al-text-main);">${app.name}</div>
+                    <div style="font-size: 0.75rem; color: var(--al-text-muted); font-family: monospace;">${app.packageName}</div>
+                  </div>
+                </div>
+              </td>
+              <td style="padding: 1rem;">${app.developer}</td>
+              <td style="padding: 1rem;"><span class="al-badge al-badge-neutral">${app.category}</span></td>
+              <td style="padding: 1rem; font-family: monospace;">v${app.currentVersion}</td>
+              <td style="padding: 1rem;">${badge}</td>
+              <td style="padding: 1rem 1.5rem; text-align: right;">
+                <div style="display: inline-flex; gap: 0.4rem;">
+                  <a href="application.html?id=${app.id}" class="al-btn al-btn-subtle al-btn-sm" title="View app page">View</a>
+                  <a href="updates.html?id=${app.id}" class="al-btn al-btn-subtle al-btn-sm" title="Configure diff">Diff</a>
+                </div>
+              </td>
+            </tr>
+          `;
+        });
+        tbody.innerHTML = html;
+      }
+
+      // 3. Render Moderation Queue
+      const modContainer = document.getElementById("admin-moderation-list");
+      let pendingReports = [
+        {
+          id: "mod-1",
+          user: "David T.",
+          app: "Spotify: Music and Podcasts",
+          device: "OnePlus 12 (OxygenOS 14)",
+          version: "8.9.72",
+          title: "Bluetooth auto-pause bug confirmed in car",
+          summary: "Connects to car Bluetooth, plays 12 seconds, then pauses.",
+          status: "pending"
+        },
+        {
+          id: "mod-2",
+          user: "Elena Rovas",
+          app: "WhatsApp Messenger",
+          device: "iPhone 15 Pro (iOS 18)",
+          version: "2.24.20.12",
+          title: "Camera switching is buttery smooth now",
+          summary: "Fixed 1-second freeze between 1x and 0.5x ultra-wide lens.",
+          status: "pending"
+        },
+        {
+          id: "mod-3",
+          user: "Nathan B.",
+          app: "Reddit",
+          device: "Galaxy S23+ (Android 14)",
+          version: "2024.36.0",
+          title: "Phone gets warm after 15 minutes of scrolling",
+          summary: "Thermal warning around camera bump with continuous video autoplay.",
+          status: "pending"
+        }
+      ];
+
+      function renderModeration() {
+        if (pendingReports.length === 0) {
+          modContainer.innerHTML = `<div style="padding: 2rem; text-align: center; color: var(--al-text-muted);">Queue clear. All reports audited!</div>`;
+          return;
+        }
+
+        let html = "";
+        pendingReports.forEach((item, idx) => {
+          html += `
+            <div id="mod-card-${item.id}" class="al-card" style="background: var(--al-surface-alt); padding: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.2rem;">
+                    <span style="font-weight: 650; color: var(--al-text-main); font-size: 0.9375rem;">${item.title}</span>
+                    <span class="al-badge al-badge-caution">Audit Pending</span>
+                  </div>
+                  <div style="font-size: 0.8125rem; color: var(--al-text-muted);">
+                    By ${item.user} • ${item.app} (v${item.version}) on ${item.device}
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                  <button class="al-btn al-btn-primary al-btn-sm" onclick="approveReport('${item.id}')">Approve & Verify</button>
+                  <button class="al-btn al-btn-secondary al-btn-sm" onclick="dismissReport('${item.id}')">Dismiss</button>
+                </div>
+              </div>
+              <p style="margin: 0; font-size: 0.875rem; color: var(--al-text-secondary); line-height: 1.45;">${item.summary}</p>
+            </div>
+          `;
+        });
+        modContainer.innerHTML = html;
+      }
+
+      window.approveReport = function (id) {
+        pendingReports = pendingReports.filter(r => r.id !== id);
+        renderModeration();
+        window.AppLens.showToast("Report approved and marked as verified!", "success");
+      };
+
+      window.dismissReport = function (id) {
+        pendingReports = pendingReports.filter(r => r.id !== id);
+        renderModeration();
+        window.AppLens.showToast("Report dismissed.", "info");
+      };
+
+      renderModeration();
+
+      // 4. Populate App options in Version Editor
+      const verSelect = document.getElementById("admin-ver-app-select");
+      if (verSelect && window.APPLENS_DATA) {
+        window.APPLENS_DATA.apps.forEach(a => {
+          const opt = document.createElement("option");
+          opt.value = a.id;
+          opt.textContent = a.name;
+          verSelect.appendChild(opt);
+        });
+      }
+
+      // 5. Handle New App Modal Form Submission
+      const newAppForm = document.getElementById("new-app-form");
+      if (newAppForm) {
+        newAppForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const modal = bootstrap.Modal.getInstance(document.getElementById('newAppModal'));
+          if (modal) modal.hide();
+          window.AppLens.showToast("Application registered in catalog!", "success");
+        });
+      }
+    });
+  </script>
+</body>
+</html>

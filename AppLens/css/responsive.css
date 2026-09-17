@@ -1,0 +1,171 @@
+/* ==========================================================================
+   AppLens - Responsive Architecture
+   Desktop App Shell + Dedicated Mobile App Bar
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Mobile Bottom Navigation Bar (App Store / Modern Mobile App)
+   -------------------------------------------------------------------------- */
+.al-mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--al-bottom-nav-height);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid var(--al-border);
+  z-index: 1000;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+.al-mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  font-size: 0.6875rem;
+  font-weight: 550;
+  color: var(--al-text-muted);
+  text-decoration: none !important;
+  flex: 1;
+  height: 100%;
+  padding-top: 0.25rem;
+  transition: color var(--al-duration-fast) var(--al-ease);
+}
+
+.al-mobile-nav-item svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2;
+}
+
+.al-mobile-nav-item.active {
+  color: var(--al-red);
+}
+
+.al-mobile-nav-item:active {
+  transform: scale(0.95);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .al-header-search-trigger {
+    min-width: unset;
+    padding: 0.45rem 0.6rem;
+  }
+  
+  .al-header-search-trigger span,
+  .al-header-search-trigger .al-kbd-hint {
+    display: none;
+  }
+
+  .al-feature-triad {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .al-hero-title {
+    font-size: 2.25rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  /* Show Mobile Bottom Navigation */
+  .al-mobile-bottom-nav {
+    display: flex;
+  }
+
+  /* Adjust Main Content Bottom Padding for Nav Bar */
+  .al-main {
+    padding-bottom: calc(var(--al-bottom-nav-height) + 2rem);
+    padding-top: calc(var(--al-header-height) + 1rem);
+  }
+
+  /* Hide Desktop Links in Header */
+  .al-nav-links,
+  .al-header-report-btn {
+    display: none !important;
+  }
+
+  /* Compact Hero */
+  .al-hero {
+    padding: 2rem 0 1.5rem;
+  }
+
+  .al-hero-title {
+    font-size: 1.85rem;
+    line-height: 1.2;
+  }
+
+  .al-hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .al-hero-search-input {
+    height: 50px;
+    font-size: 0.9375rem;
+    padding: 0 1rem 0 2.85rem;
+  }
+
+  .al-hero-search-kbd {
+    display: none;
+  }
+
+  .al-hero-search-icon {
+    left: 1rem;
+  }
+
+  /* App Details Mobile Layout */
+  .al-app-hero-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .al-app-detail-hero {
+    padding: 1.5rem;
+  }
+
+  .al-app-hero-title {
+    font-size: 1.625rem;
+  }
+
+  .al-version-flow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .al-app-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Shell padding on small screens */
+  .al-shell {
+    padding: 0 1rem;
+  }
+
+  /* Search modal fits mobile screen cleanly */
+  .al-search-modal-backdrop {
+    padding-top: 0;
+    align-items: flex-start;
+  }
+
+  .al-search-modal {
+    border-radius: 0 0 var(--al-radius-xl) var(--al-radius-xl);
+    max-height: 90vh;
+  }
+
+  .al-footer {
+    margin-bottom: var(--al-bottom-nav-height);
+  }
+}

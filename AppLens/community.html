@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Reports — AppLens</title>
+  <meta name="description" content="Real experiences and device-specific reports from people who actually use the apps.">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Top Acrylic Glass Navigation -->
+  <header class="al-header al-glass">
+    <div class="al-shell">
+      <div class="al-header-inner">
+        <a href="index.html" class="al-logo">
+          <div class="al-logo-mark">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <span>AppLens</span>
+        </a>
+
+        <ul class="al-nav-links">
+          <li><a href="explore.html" class="al-nav-link">Explore</a></li>
+          <li><a href="updates.html" class="al-nav-link">Updates</a></li>
+          <li><a href="community.html" class="al-nav-link active">Community</a></li>
+        </ul>
+
+        <div class="al-header-actions">
+          <button class="al-header-search-trigger js-search-trigger" type="button" aria-label="Open search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span>Search apps...</span>
+            <kbd class="al-kbd-hint">Ctrl K</kbd>
+          </button>
+
+          <a href="submit-report.html" class="al-btn al-btn-primary al-header-report-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Submit Report</span>
+          </a>
+
+          <a href="profile.html" class="al-btn al-btn-subtle" style="padding: 0.5rem; border-radius: var(--al-radius-full);" title="My Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="al-main">
+    <div class="al-shell">
+      
+      <!-- Headline & Subtitle -->
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2.25rem;">
+        <div style="max-width: 640px;">
+          <h1 style="font-size: 2.15rem; margin-bottom: 0.4rem;">Real experiences. Not marketing.</h1>
+          <p style="color: var(--al-text-secondary); font-size: 1.0625rem; line-height: 1.55; margin: 0;">
+            Authentic community observations, hardware regression logs, and device battery experiences submitted by verified users.
+          </p>
+        </div>
+
+        <a href="submit-report.html" class="al-btn al-btn-primary al-btn-lg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>Share Your Experience</span>
+        </a>
+      </div>
+
+      <!-- Filters & Control Strip -->
+      <div style="background: var(--al-surface); border: 1px solid var(--al-border); border-radius: var(--al-radius-lg); padding: 1.25rem; margin-bottom: 2rem; box-shadow: var(--al-shadow-xs);">
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+          
+          <!-- App filter dropdown -->
+          <div style="display: flex; align-items: center; gap: 0.5rem; min-width: 220px;">
+            <span style="font-size: 0.8125rem; font-weight: 600; color: var(--al-text-muted);">Application:</span>
+            <select id="filter-app" class="al-input" style="padding: 0.45rem 0.875rem; font-size: 0.875rem;">
+              <option value="all">All Applications</option>
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <!-- Issue type filter dropdown -->
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 0.8125rem; font-weight: 600; color: var(--al-text-muted);">Issue Type:</span>
+            <select id="filter-issue" class="al-input" style="width: auto; padding: 0.45rem 0.875rem; font-size: 0.875rem;">
+              <option value="all">All Issues</option>
+              <option value="Battery">Battery Drain</option>
+              <option value="Heating">Overheating</option>
+              <option value="Performance">Performance / Lag</option>
+              <option value="Bug">Bug / Glitch</option>
+              <option value="Crash">Crash / Freeze</option>
+              <option value="Privacy">Privacy Concern</option>
+            </select>
+          </div>
+
+          <!-- Keyword search inside reports -->
+          <div style="flex: 1; min-width: 240px; position: relative;">
+            <input 
+              type="text" 
+              id="filter-search" 
+              class="al-input" 
+              style="padding: 0.45rem 1rem; font-size: 0.875rem;" 
+              placeholder="Search by device or keyword..."
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Feed Layout -->
+      <div class="row g-4">
+        
+        <!-- Left: Reports Feed List -->
+        <div class="col-lg-8">
+          <div id="reports-feed">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Right: Community Guidelines & Verification Explanation -->
+        <div class="col-lg-4">
+          
+          <div class="al-card mb-4" style="background: var(--al-surface-alt);">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--al-red)" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <h4 style="font-size: 0.9375rem; font-weight: 650; margin: 0;">Verified Community Reports</h4>
+            </div>
+            <p style="font-size: 0.8125rem; color: var(--al-text-secondary); margin: 0; line-height: 1.5;">
+              Reports marked with the verified badge are cross-referenced with exact OS telemetry and submitted through verified package installs.
+            </p>
+          </div>
+
+          <div class="al-card">
+            <h4 style="font-size: 1rem; font-weight: 650; margin-bottom: 0.75rem;">Community Principles</h4>
+            <ul style="padding-left: 1.2rem; margin: 0; font-size: 0.8125rem; color: var(--al-text-secondary); display: flex; flex-direction: column; gap: 0.5rem;">
+              <li>Be specific about your device model and OS version.</li>
+              <li>Document reproducible behavior over general complaints.</li>
+              <li>Include battery percentages or reproduction steps where applicable.</li>
+              <li>No paid promotions or sponsored endorsements.</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="al-mobile-bottom-nav">
+    <a href="index.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+      <span>Home</span>
+    </a>
+    <a href="explore.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <span>Explore</span>
+    </a>
+    <a href="updates.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+      <span>Updates</span>
+    </a>
+    <a href="community.html" class="al-mobile-nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      <span>Community</span>
+    </a>
+    <a href="profile.html" class="al-mobile-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="al-footer">
+    <div class="al-shell">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+        <div>
+          <div style="font-weight: 700; color: var(--al-text-main); margin-bottom: 0.25rem;">AppLens</div>
+          <p style="margin: 0; font-size: 0.8125rem;">A community-driven application intelligence platform.</p>
+        </div>
+        <div class="al-footer-links">
+          <a href="explore.html">Explore Apps</a>
+          <a href="updates.html">Before You Update</a>
+          <a href="submit-report.html">Submit Report</a>
+          <a href="admin.html">System Admin</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/animations.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const feedContainer = document.getElementById("reports-feed");
+      const appFilter = document.getElementById("filter-app");
+      const issueFilter = document.getElementById("filter-issue");
+      const searchFilter = document.getElementById("filter-search");
+
+      // Check URL for default app filter
+      const urlAppId = new URLSearchParams(window.location.search).get("id");
+
+      // Populate app filter dropdown
+      if (appFilter && window.APPLENS_DATA) {
+        window.APPLENS_DATA.apps.forEach(app => {
+          const opt = document.createElement("option");
+          opt.value = app.id;
+          opt.textContent = app.name;
+          if (urlAppId && urlAppId === app.id) {
+            opt.selected = true;
+          }
+          appFilter.appendChild(opt);
+        });
+      }
+
+      function getAllReports() {
+        let all = [];
+        window.APPLENS_DATA.apps.forEach(app => {
+          const reps = window.AppLens.getReportsForApp(app.id);
+          reps.forEach(r => {
+            all.push({
+              ...r,
+              appName: app.name,
+              appIcon: app.icon,
+              appId: app.id
+            });
+          });
+        });
+        return all;
+      }
+
+      function renderFeed() {
+        const selectedApp = appFilter.value;
+        const selectedIssue = issueFilter.value;
+        const query = searchFilter.value.trim().toLowerCase();
+
+        let reports = getAllReports();
+
+        let filtered = reports.filter(r => {
+          const matchApp = selectedApp === "all" || r.appId === selectedApp;
+          const matchIssue = selectedIssue === "all" || r.issueType === selectedIssue;
+          const matchQuery = !query || 
+                             r.title.toLowerCase().includes(query) ||
+                             r.content.toLowerCase().includes(query) ||
+                             r.device.toLowerCase().includes(query) ||
+                             r.appName.toLowerCase().includes(query);
+          return matchApp && matchIssue && matchQuery;
+        });
+
+        if (filtered.length === 0) {
+          feedContainer.innerHTML = `
+            <div class="al-card" style="padding: 3rem 1.5rem; text-align: center;">
+              <p style="font-weight: 600; margin-bottom: 0.4rem;">No community reports match your filters</p>
+              <span style="font-size: 0.875rem; color: var(--al-text-muted);">Try selecting "All Applications" or clearing the search query.</span>
+            </div>
+          `;
+          return;
+        }
+
+        let html = "";
+        filtered.forEach(rep => {
+          const issueBadge = rep.issueType === "Battery" 
+            ? `<span class="al-badge al-badge-caution">Battery Drain</span>`
+            : (rep.issueType === "Heating" ? `<span class="al-badge al-badge-warning">Overheating</span>` : `<span class="al-badge al-badge-neutral">${rep.issueType}</span>`);
+
+          html += `
+            <article class="al-report-card">
+              <div class="al-report-header">
+                <div class="al-report-user-info">
+                  <div style="width: 32px; height: 32px; border-radius: var(--al-radius-full); background: var(--al-surface-alt); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.8125rem;">
+                    ${rep.user.charAt(0)}
+                  </div>
+                  <div>
+                    <div style="font-weight: 650; font-size: 0.875rem; display: flex; align-items: center; gap: 0.35rem;">
+                      <span>${rep.user}</span>
+                      ${rep.verified ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="var(--al-red)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>` : ''}
+                    </div>
+                    <div style="font-size: 0.75rem; color: var(--al-text-muted);">
+                      Reported ${rep.date}
+                    </div>
+                  </div>
+                </div>
+
+                <a href="application.html?id=${rep.appId}" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+                  <div class="al-app-icon sm" style="width: 26px; height: 26px; border-radius: 6px;">
+                    ${rep.appIcon}
+                  </div>
+                  <span style="font-size: 0.8125rem; font-weight: 600; color: var(--al-text-main);">${rep.appName}</span>
+                </a>
+              </div>
+
+              <div class="al-report-meta-pills">
+                ${issueBadge}
+                <span class="al-badge al-badge-neutral">v${rep.appVersion}</span>
+                <span class="al-badge al-badge-neutral">${rep.device}</span>
+                <span class="al-badge al-badge-neutral">${rep.osVersion}</span>
+              </div>
+
+              <h3 style="font-size: 1.0625rem; font-weight: 650; margin-bottom: 0.5rem; color: var(--al-text-main);">
+                ${rep.title}
+              </h3>
+
+              <p style="font-size: 0.9375rem; color: var(--al-text-secondary); line-height: 1.55; margin-bottom: 1.25rem;">
+                ${rep.content}
+              </p>
+
+              <div class="al-report-actions">
+                <button type="button" class="al-upvote-btn ${rep.userUpvoted ? 'upvoted' : ''}" data-report-id="${rep.id}">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                  </svg>
+                  <span>Helpful</span>
+                  <span class="al-upvote-count">${rep.upvotes}</span>
+                </button>
+
+                <div style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8125rem;">
+                  <span>User Rating:</span>
+                  ${window.AppLens.renderStars(rep.rating)}
+                </div>
+              </div>
+            </article>
+          `;
+        });
+
+        feedContainer.innerHTML = html;
+      }
+
+      // Event listeners
+      appFilter.addEventListener("change", renderFeed);
+      issueFilter.addEventListener("change", renderFeed);
+      searchFilter.addEventListener("input", renderFeed);
+
+      // Initial render
+      renderFeed();
+    });
+  </script>
+</body>
+</html>
