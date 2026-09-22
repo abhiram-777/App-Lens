@@ -44,7 +44,7 @@
             <kbd class="al-kbd-hint">Ctrl K</kbd>
           </button>
 
-          <a href="submit-report.html" class="al-btn al-btn-primary al-header-report-btn">
+          <a href="login.html" class="al-btn al-btn-primary al-header-report-btn js-login-required">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <line x1="12" y1="5" x2="12" y2="19"></line>
               <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -52,7 +52,7 @@
             <span>Submit Report</span>
           </a>
 
-          <a href="profile.html" class="al-btn al-btn-subtle" style="padding: 0.5rem; border-radius: var(--al-radius-full);" title="My Profile">
+          <a href="login.html" class="al-btn al-btn-subtle" style="padding: 0.5rem; border-radius: var(--al-radius-full);" title="Sign in">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
               <circle cx="12" cy="7" r="4"></circle>
@@ -140,7 +140,7 @@
             <p id="verdict-summary" style="font-size: 0.9375rem; color: var(--al-text-main); margin: 0; line-height: 1.5;"></p>
           </div>
 
-          <a id="btn-report-version-issue" href="submit-report.html" class="al-btn al-btn-secondary al-btn-sm">
+          <a id="btn-report-version-issue" href="login.html" class="al-btn al-btn-secondary al-btn-sm js-login-required">
             Report an issue with this version
           </a>
         </div>
@@ -243,9 +243,9 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
       <span>Community</span>
     </a>
-    <a href="profile.html" class="al-mobile-nav-item">
+    <a href="login.html" class="al-mobile-nav-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-      <span>Profile</span>
+      <span>Sign in</span>
     </a>
   </nav>
 
@@ -260,7 +260,7 @@
         <div class="al-footer-links">
           <a href="explore.html">Explore Apps</a>
           <a href="updates.html">Before You Update</a>
-          <a href="submit-report.html">Submit Report</a>
+          <a href="login.html" class="js-login-required">Submit Report</a>
           <a href="admin.html">System Admin</a>
         </div>
       </div>
@@ -289,7 +289,7 @@
       document.getElementById("tab-update").href = `updates.html?id=${app.id}`;
       document.getElementById("tab-versions").href = `versions.html?id=${app.id}`;
       document.getElementById("tab-community").href = `community.html?id=${app.id}`;
-      document.getElementById("btn-report-version-issue").href = `submit-report.html?id=${app.id}&version=${app.currentVersion}`;
+      document.getElementById("btn-report-version-issue").href = "login.html";
 
       // Populate App Header
       document.getElementById("app-icon-container").innerHTML = app.icon;

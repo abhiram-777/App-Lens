@@ -211,3 +211,13 @@ const AppLens = (function () {
 })();
 
 window.AppLens = AppLens;
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".js-login-required").forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      window.alert("You have to login to continue.");
+      window.location.assign("login.html");
+    });
+  });
+});
