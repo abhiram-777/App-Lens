@@ -213,11 +213,20 @@ const AppLens = (function () {
 window.AppLens = AppLens;
 
 document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll(".js-login-required").forEach(function (link) {
-    link.addEventListener("click", function (event) {
-      event.preventDefault();
-      window.alert("You have to login to continue.");
-      window.location.assign("login.html");
-    });
-  });
+  function redirectToLogin(event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.alert("You need to log in to do that action.");
+    window.location.assign("login.html");
+  }
+
+  document.addEventListener("click", function (event) {
+    const submitLink = event.target.closest(".js-login-required, a[href^='submit-report.html']");
+    const reportSubmitButton = event.target.closest("#report-form button[type='submit']");
+    if (submitLink || reportSubmitButton) redirectToLogin(event);
+  }, true);
+
+  document.addEventListener("submit", function (event) {
+    if (event.target.id === "report-form") redirectToLogin(event);
+  }, true);
 });

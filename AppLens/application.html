@@ -127,14 +127,13 @@
           <a id="tab-privacy" href="#" class="al-app-tab">Privacy & Permissions</a>
           <a id="tab-update" href="#" class="al-app-tab">Before You Update</a>
           <a id="tab-versions" href="#" class="al-app-tab">Version History</a>
-          <a id="tab-community" href="#" class="al-app-tab">Community Experiences</a>
         </div>
       </section>
 
       <!-- Section: Overview Core Details -->
-      <div class="row g-4 mb-5">
-        <!-- Left: About & Recent Changes -->
-        <div class="col-lg-8">
+      <div class="row">
+        <!-- About the application -->
+        <div class="col-12">
           
           <!-- About the app -->
           <div class="al-card mb-4">
@@ -163,6 +162,13 @@
             </div>
           </div>
 
+        </div>
+      </div>
+
+      <div class="row g-4 mb-5">
+        <!-- Left: Recent Changes -->
+        <div class="col-lg-8">
+
           <!-- Signature Recent Update Highlight -->
           <div class="al-card mb-4">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
@@ -180,9 +186,29 @@
             </div>
           </div>
 
+          <!-- Community Experiences -->
+          <div class="al-card mb-4">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+              <h2 style="font-size: 1.25rem; margin: 0;">Community Experiences</h2>
+              <a id="link-view-community" href="#" class="al-btn al-btn-subtle al-btn-sm" style="font-size: 0.8125rem;">
+                View All
+              </a>
+            </div>
+
+            <div id="quick-community-preview">
+              <!-- Rendered via JS -->
+            </div>
+
+            <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--al-border-subtle);">
+              <a id="btn-submit-report-app" href="#" class="al-btn al-btn-secondary al-btn-sm w-100">
+                Submit Your Experience
+              </a>
+            </div>
+          </div>
+
         </div>
 
-        <!-- Right: Privacy snapshot & Quick Community Preview -->
+        <!-- Right: Privacy snapshot -->
         <div class="col-lg-4">
           
           <!-- Permissions Overview Card -->
@@ -198,26 +224,6 @@
             </p>
             <div id="quick-permissions-list" style="display: flex; flex-direction: column; gap: 0.5rem;">
               <!-- Rendered via JS -->
-            </div>
-          </div>
-
-          <!-- Community Feedback Preview Card -->
-          <div class="al-card">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-              <h3 style="font-size: 1.1rem; margin: 0;">Community Voice</h3>
-              <a id="link-view-community" href="#" class="al-btn al-btn-subtle al-btn-sm" style="font-size: 0.8125rem;">
-                View All
-              </a>
-            </div>
-            
-            <div id="quick-community-preview">
-              <!-- Rendered via JS -->
-            </div>
-
-            <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--al-border-subtle);">
-              <a id="btn-submit-report-app" href="#" class="al-btn al-btn-secondary al-btn-sm w-100">
-                Submit Your Experience
-              </a>
             </div>
           </div>
 
@@ -292,7 +298,6 @@
       document.getElementById("tab-privacy").href = `privacy.html?id=${app.id}`;
       document.getElementById("tab-update").href = `updates.html?id=${app.id}`;
       document.getElementById("tab-versions").href = `versions.html?id=${app.id}`;
-      document.getElementById("tab-community").href = `community.html?id=${app.id}`;
       document.getElementById("btn-before-update").href = `updates.html?id=${app.id}`;
       document.getElementById("link-view-diff").href = `updates.html?id=${app.id}`;
       document.getElementById("link-view-privacy").href = `privacy.html?id=${app.id}`;
@@ -376,25 +381,25 @@
       });
       permContainer.innerHTML = permHtml;
 
-      // Populate Quick Community Feedback Preview
+      // Populate Community Experiences Preview
       const reports = window.AppLens.getReportsForApp(app.id);
       const communityContainer = document.getElementById("quick-community-preview");
       if (reports.length > 0) {
-        const topReport = reports[0];
-        communityContainer.innerHTML = `
-          <div style="background: var(--al-surface-alt); border-radius: var(--al-radius-md); padding: 1rem; font-size: 0.875rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
-              <span style="font-weight: 600; color: var(--al-text-main);">${topReport.user}</span>
-              <span class="al-badge al-badge-neutral" style="font-size: 0.7rem;">${topReport.device}</span>
+        communityContainer.innerHTML = reports.slice(0, 4).map(report => `
+          <div style="background: var(--al-surface-alt); border-radius: var(--al-radius-md); padding: 1rem; font-size: 0.875rem; margin-bottom: 0.75rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin-bottom: 0.4rem;">
+              <span style="font-weight: 600; color: var(--al-text-main);">${report.user}</span>
+              <span class="al-badge al-badge-neutral" style="font-size: 0.7rem;">${report.device}</span>
             </div>
             <p style="margin: 0; color: var(--al-text-secondary); line-height: 1.45; font-size: 0.8125rem;">
-              "${topReport.title}"
+              "${report.title}"
             </p>
           </div>
-        `;
+        `).join("");
       } else {
         communityContainer.innerHTML = `<p style="font-size: 0.8125rem; color: var(--al-text-muted); margin: 0;">No reports submitted yet.</p>`;
       }
+
     });
   </script>
 </body>
